@@ -12,7 +12,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
   const chainId = network.config.chainId;
   log("-----------------");
   arguments = [];
-  const clonex = await deploy("CloneX", {
+  const clonex = await deploy("clonex", {
     from: deployer,
     args: arguments,
     log: true,
@@ -24,7 +24,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     process.env.ETHERSCAN_API_KEY
   ) {
     log("verifying...");
-    await verify(clonex.address, arguments, "clonex", "CloneX");
+    await verify(clonex.address, arguments, "clonex", "clonex");
   }
   log("-----------------");
 };

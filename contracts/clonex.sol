@@ -16,7 +16,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 // This is just a test NFT collections that helps decentralized Finance, NFT Finance, Social Finance and others kind Dapps building on testnet.
-contract CloneX is ERC721, Ownable {
+contract clonex is ERC721, Ownable {
     using Strings for uint256;
     using Counters for Counters.Counter;
 
@@ -115,8 +115,8 @@ contract CloneX is ERC721, Ownable {
 
     function _mintLoop(address _receiver, uint256 _mintAmount) internal {
         for (uint256 i = 0; i < _mintAmount; i++) {
-            _safeMint(_receiver, supply.current());
             supply.increment();
+            _safeMint(_receiver, supply.current());
         }
     }
 
