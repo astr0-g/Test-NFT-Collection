@@ -26,11 +26,11 @@ contract BoredApeYachtClub is ERC721, Ownable {
         "ipfs://QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/";
     string public uriSuffix = "";
 
-    uint256 public publicMintCost = 0.01 ether;
+    uint256 public mintCost = 0.01 ether;
     uint256 public maxSupply = 10000;
     uint256 public maxMintAmountPerTx = 2;
-    uint256 publicMintLimit = 2;
-    mapping(address => uint256) public publicMintCount;
+    uint256 mintLimit = 2;
+    mapping(address => uint256) public mintCount;
 
     constructor() ERC721("BoredApeYachtClub", "BAYC") {}
 
@@ -50,24 +50,19 @@ contract BoredApeYachtClub is ERC721, Ownable {
         return supply.current();
     }
 
-    function publicMint(
-        uint256 _mintAmount
-    ) public payable mintRequire(_mintAmount) {
+    function mint(uint256 _mintAmount) public payable mintRequire(_mintAmount) {
+        require(msg.value >= mintCost * _mintAmount, "Insufficient funds!");
         require(
-            msg.value >= publicMintCost * _mintAmount,
-            "Insufficient funds!"
-        );
-        require(
-            publicMintCount[msg.sender] + _mintAmount <= publicMintLimit,
+            mintCount[msg.sender] + _mintAmount <= mintLimit,
             "public mint limit exceeded"
         );
 
         _mintLoop(msg.sender, _mintAmount);
-        publicMintCount[msg.sender] += _mintAmount;
+        mintCount[msg.sender] += _mintAmount;
     }
 
-    function getPublicMintCount() public view returns (uint256) {
-        return publicMintCount[msg.sender];
+    function getmintCount() public view returns (uint256) {
+        return mintCount[msg.sender];
     }
 
     function walletOfOwner(
@@ -104,13 +99,7 @@ contract BoredApeYachtClub is ERC721, Ownable {
         string memory currentBaseURI = _baseURI();
         return
             bytes(currentBaseURI).length > 0
-                ? string(
-                    abi.encodePacked(
-                        currentBaseURI,
-                        (_tokenId - 1).toString(),
-                        uriSuffix
-                    )
-                )
+                ? string(abi.encodePacked(currentBaseURI, _tokenId, uriSuffix))
                 : "";
     }
 
