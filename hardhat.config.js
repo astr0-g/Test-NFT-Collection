@@ -1,28 +1,28 @@
-require("@nomiclabs/hardhat-waffle")
-require("@nomiclabs/hardhat-etherscan")
-require("hardhat-deploy")
-require("solidity-coverage")
-require("hardhat-gas-reporter")
-require("hardhat-contract-sizer")
-require("dotenv").config()
+require("@nomiclabs/hardhat-waffle");
+require("@nomiclabs/hardhat-etherscan");
+require("hardhat-deploy");
+require("solidity-coverage");
+require("hardhat-gas-reporter");
+require("hardhat-contract-sizer");
+require("dotenv").config();
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
-const GORRLI_RPC_URL = process.env.GOERLI_RPC_URL
-const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL
-const RINKEBY_PRIVATE_KEY = process.env.RINKEBY_PRIVATE_KEY
-const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
-const COINMARKET_KEY = process.env.COINMARKET_KEY
-const ARB_RPC_URL = process.env.ARB_RPC_URL
-const MUMBAI_RPC_URL = process.env.MUMBAI_RPC_URL
+const GORRLI_RPC_URL = process.env.GOERLI_RPC_URL;
+const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL;
+const RINKEBY_PRIVATE_KEY = process.env.RINKEBY_PRIVATE_KEY;
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
+const COINMARKET_KEY = process.env.COINMARKET_KEY;
+const ARB_RPC_URL = process.env.ARB_RPC_URL;
+const MUMBAI_RPC_URL = process.env.MUMBAI_RPC_URL;
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
-  const accounts = await hre.ethers.getSigners()
+  const accounts = await hre.ethers.getSigners();
 
   for (const account of accounts) {
-    console.log(account.address)
+    console.log(account.address);
   }
-})
+});
 module.exports = {
   solidity: {
     compilers: [
@@ -77,6 +77,7 @@ module.exports = {
     goerli: {
       url: GORRLI_RPC_URL,
       accounts: [RINKEBY_PRIVATE_KEY],
+      gasPrice: 50000000000,
       chainId: 5,
       blockConfirmations: 6,
     },
@@ -103,4 +104,4 @@ module.exports = {
   mocha: {
     timeout: 2000000,
   },
-}
+};

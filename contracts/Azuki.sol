@@ -96,10 +96,17 @@ contract Azuki is ERC721, Ownable {
             "ERC721Metadata: URI query for nonexistent token"
         );
         string memory currentBaseURI = _baseURI();
-        return
+        return (
             bytes(currentBaseURI).length > 0
-                ? string(abi.encodePacked(currentBaseURI, _tokenId, uriSuffix))
-                : "";
+                ? string(
+                    abi.encodePacked(
+                        currentBaseURI,
+                        _tokenId.toString(),
+                        uriSuffix
+                    )
+                )
+                : ""
+        );
     }
 
     function withdraw() public onlyOwner {

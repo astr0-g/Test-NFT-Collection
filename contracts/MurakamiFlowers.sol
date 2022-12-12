@@ -99,7 +99,13 @@ contract MurakamiFlowers is ERC721, Ownable {
         string memory currentBaseURI = _baseURI();
         return
             bytes(currentBaseURI).length > 0
-                ? string(abi.encodePacked(currentBaseURI, _tokenId, uriSuffix))
+                ? string(
+                    abi.encodePacked(
+                        currentBaseURI,
+                        _tokenId.toString(),
+                        uriSuffix
+                    )
+                )
                 : "";
     }
 
