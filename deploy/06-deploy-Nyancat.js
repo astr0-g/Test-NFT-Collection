@@ -17,8 +17,8 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 
     if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         log("verifying...")
-        await verify(Nyancat.address, arguments, "Doodles", "Doodles")
+        await verify(Nyancat.address, arguments, "ERC1155/Nyancat", "Nyancat")
     }
     log("-----------------")
 }
-module.exports.tags = ["all", "main", "frontend"]
+module.exports.tags = ["all", "main", "nyan"]
