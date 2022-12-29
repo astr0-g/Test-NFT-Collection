@@ -12,7 +12,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
   const chainId = network.config.chainId;
   log("-----------------");
   arguments = [];
-  const Doodles = await deploy("Doodles", {
+  const OthersideLand = await deploy("OthersideLand", {
     from: deployer,
     args: arguments,
     log: true,
@@ -24,8 +24,13 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     process.env.ETHERSCAN_API_KEY
   ) {
     log("verifying...");
-    await verify(Doodles.address, arguments, "Doodles", "Doodles");
+    await verify(
+      OthersideLand.address,
+      arguments,
+      "ERC4907/OthersideLand",
+      "OthersideLand"
+    );
   }
   log("-----------------");
 };
-module.exports.tags = ["all", "main", "ERC721"];
+module.exports.tags = ["all", "main", "ERC4907"];

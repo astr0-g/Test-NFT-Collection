@@ -12,7 +12,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
   const chainId = network.config.chainId;
   log("-----------------");
   arguments = [];
-  const Doodles = await deploy("Doodles", {
+  const Landers = await deploy("Landers", {
     from: deployer,
     args: arguments,
     log: true,
@@ -24,8 +24,8 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     process.env.ETHERSCAN_API_KEY
   ) {
     log("verifying...");
-    await verify(Doodles.address, arguments, "Doodles", "Doodles");
+    await verify(Landers.address, arguments, "ERC4907/3Landers", "Landers");
   }
   log("-----------------");
 };
-module.exports.tags = ["all", "main", "ERC721"];
+module.exports.tags = ["all", "main", "ERC4907"];
