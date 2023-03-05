@@ -18,6 +18,7 @@ const { developmentChains } = require("../../helper-hardhat-config");
         player8,
         player9;
       const PRICE = ethers.utils.parseEther("0.01");
+      const PRICE2 = ethers.utils.parseEther("0.1");
       const Token_ID = 0;
       beforeEach(async () => {
         deployer = (await getNamedAccounts()).deployer;
@@ -41,9 +42,39 @@ const { developmentChains } = require("../../helper-hardhat-config");
         Nyancat = await ethers.getContract("Nyancat");
         OthersideLand = await ethers.getContract("OthersideLand");
         Landers = await ethers.getContract("Landers");
+        CoolCats = await ethers.getContract("CoolCats");
+        CryptoSkulls = await ethers.getContract("CryptoSkulls");
+        CyberKongz = await ethers.getContract("CyberKongz");
+        InvisibleFriends = await ethers.getContract("InvisibleFriends");
+        Karafuru = await ethers.getContract("Karafuru");
       });
 
       describe("Construtor", () => {
+        it("URL test", async () => {
+          await Karafuru.mint("1", { value: PRICE2 });
+          const url = await Karafuru.tokenURI(1);
+          console.log(url);
+        });
+        it("URL test", async () => {
+          await InvisibleFriends.mint("1", { value: PRICE2 });
+          const url = await InvisibleFriends.tokenURI(1);
+          console.log(url);
+        });
+        it("URL test", async () => {
+          await CyberKongz.mint("1", { value: PRICE2 });
+          const url = await CyberKongz.tokenURI(1);
+          console.log(url);
+        });
+        it("URL test", async () => {
+          await CryptoSkulls.mint("1", { value: PRICE2 });
+          const url = await CryptoSkulls.tokenURI(0);
+          console.log(url);
+        });
+        it("URL test", async () => {
+          await CoolCats.mint("1", { value: PRICE2 });
+          const url = await CoolCats.tokenURI(0);
+          console.log(url);
+        });
         it("URL test", async () => {
           await Azuki.mint("1", { value: PRICE });
           const url = await Azuki.tokenURI(0);
